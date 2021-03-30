@@ -1,0 +1,90 @@
+<div class="mood-board-container">
+  <div class="callendar-page-container"> 
+    <div class="callendar-page">
+      <div class="callendar-top"></div>
+      <div class="day-number">{{day}}</div>
+      <div class="month-label">{{month}}</div>
+    </div>
+    <svg id="svg-page" width="52.917mm" height="7.465mm" version="1.1" viewBox="0 0 52.917 7.465"
+      xmlns="http://www.w3.org/2000/svg">
+      <g id="layer1" transform="translate(-75.595 -107.44)">
+        <path id="rect833"
+          d="m75.595 107.44h52.917v6.8981l-3.4396-3.0238-3.175 3.0238-3.4396-3.0238-3.175 3.0238-3.4396-3.0238-3.1183 3.5908-3.4963-3.5908-3.175 3.0238-3.4396-3.0238-3.175 3.0238-3.4396-3.0238-3.1183 3.5908-3.4963-3.5908-3.175 3.0238-3.4396-3.0238-3.175 3.0238z"
+          fill="#f7f7f7" style="paint-order:stroke markers fill" />
+      </g>
+    </svg>
+    <div id="space-bt"></div>
+  </div>
+  <div class="callendar-container">
+    <div class="callendar-top">{{month}} {{year}}</div>
+    <div id="calendar">
+      <div class="row">
+        <div class="cell header" *ngFor="let day of daysOfWeek"><span class="day-name">{{day}}</span></div>
+      </div>
+      <div class="row" *ngFor="let week of callendarArray; let i = index">
+        <div class="cell day" *ngFor="let day of week; let j = index">
+          <ng-container *ngIf="day.day > 0">
+            <input (change)="onRadioDayChange($event)" id="{{i}}-{{j}}" type="radio" class="cell-input" name="cell"
+              value={{day.day}}>
+            <label class="cell-label" for="{{i}}-{{j}}" [ngClass]="{
+                        'white': day.moodValue === 1,
+                        'red': day.moodValue === 2,
+                        'purple': day.moodValue === 3,
+                        'blue': day.moodValue === 4,
+                        'green': day.moodValue === 5,
+                        'yellow': day.moodValue === 6
+                    }">{{day.day}}</label>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="day-editor" [ngStyle]="{'opacity': daySelected ? '1.0' : '0.5', 'pointer-events' : daySelected ? 'auto' : 'none'}" >
+    <form  class="day-editor-form" #moodForm="ngForm" (ngSubmit)="templateForm(moodForm.value)" novalidate>
+      <div class="mood-radio" *ngFor="let mood of moods">
+        <label [disabled] = "!daySelected" class="mood-label white" for="{{mood.id}}"  
+        [ngClass]="{
+          'white': mood.id === 1,
+          'red': mood.id === 2,
+          'purple': mood.id === 3,
+          'blue': mood.id === 4,
+          'green': mood.id === 5,
+          'yellow': mood.id === 6
+          }">
+          <input  [disabled] = "!daySelected" (click)="moodClicked($event)" class="mood-input" id="{{mood.id}}" value="{{mood.id}}" type="radio" name="mood" ngModel>
+          <div class="icon-div" [ngSwitch]="mood.id">
+            <svg  *ngSwitchCase="1" class="mood-icon" width="25" height="25" viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+              <path 
+                d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-110.3 0-200-89.7-200-200S137.7 56 248 56s200 89.7 200 200-89.7 200-200 200zm-80-280c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm160 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32z" />
+            </svg>
+            <svg  *ngSwitchCase="2" class="mood-icon" width="25" height="25" viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+              <path 
+                d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-110.3 0-200-89.7-200-200S137.7 56 248 56s200 89.7 200 200-89.7 200-200 200zm0-144c-33.6 0-65.2 14.8-86.8 40.6-8.5 10.2-7.1 25.3 3.1 33.8s25.3 7.2 33.8-3c24.8-29.7 75-29.7 99.8 0 8.1 9.7 23.2 11.9 33.8 3 10.2-8.5 11.5-23.6 3.1-33.8-21.6-25.8-53.2-40.6-86.8-40.6zm-48-72c10.3 0 19.9-6.7 23-17.1 3.8-12.7-3.4-26.1-16.1-29.9l-80-24c-12.8-3.9-26.1 3.4-29.9 16.1-3.8 12.7 3.4 26.1 16.1 29.9l28.2 8.5c-3.1 4.9-5.3 10.4-5.3 16.6 0 17.7 14.3 32 32 32s32-14.4 32-32.1zm199-54.9c-3.8-12.7-17.1-19.9-29.9-16.1l-80 24c-12.7 3.8-19.9 17.2-16.1 29.9 3.1 10.4 12.7 17.1 23 17.1 0 17.7 14.3 32 32 32s32-14.3 32-32c0-6.2-2.2-11.7-5.3-16.6l28.2-8.5c12.7-3.7 19.9-17.1 16.1-29.8z" />
+            </svg>
+            <svg  *ngSwitchCase="3" class="mood-icon" width="25" height="25" viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+              <path 
+                d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-110.3 0-200-89.7-200-200S137.7 56 248 56s200 89.7 200 200-89.7 200-200 200zm-80-216c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32zm160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32zm16 16H152c-26.5 0-48 21.5-48 48v32c0 26.5 21.5 48 48 48h192c26.5 0 48-21.5 48-48v-32c0-26.5-21.5-48-48-48zm-168 96h-24c-8.8 0-16-7.2-16-16v-8h40v24zm0-40h-40v-8c0-8.8 7.2-16 16-16h24v24zm64 40h-48v-24h48v24zm0-40h-48v-24h48v24zm64 40h-48v-24h48v24zm0-40h-48v-24h48v24zm56 24c0 8.8-7.2 16-16 16h-24v-24h40v8zm0-24h-40v-24h24c8.8 0 16 7.2 16 16v8z" />
+            </svg>
+            <svg  *ngSwitchCase="4" class="mood-icon" width="25" height="25" viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+              <path 
+                d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-110.3 0-200-89.7-200-200S137.7 56 248 56s200 89.7 200 200-89.7 200-200 200zm8-152c-13.2 0-24 10.8-24 24s10.8 24 24 24c23.8 0 46.3 10.5 61.6 28.8 8.1 9.8 23.2 11.9 33.8 3.1 10.2-8.5 11.6-23.6 3.1-33.8C330 320.8 294.1 304 256 304zm-88-64c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32zm160-64c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm-165.6 98.8C151 290.1 126 325.4 126 342.9c0 22.7 18.8 41.1 42 41.1s42-18.4 42-41.1c0-17.5-25-52.8-36.4-68.1-2.8-3.7-8.4-3.7-11.2 0z" />
+            </svg>
+            <svg  *ngSwitchCase="5" class="mood-icon" width="25" height="25" viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+              <path 
+                d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-110.3 0-200-89.7-200-200S137.7 56 248 56s200 89.7 200 200-89.7 200-200 200zm84-143.4c-20.8 25-51.5 39.4-84 39.4s-63.2-14.3-84-39.4c-8.5-10.2-23.6-11.5-33.8-3.1-10.2 8.5-11.5 23.6-3.1 33.8 30 36 74.1 56.6 120.9 56.6s90.9-20.6 120.9-56.6c8.5-10.2 7.1-25.3-3.1-33.8-10.2-8.4-25.3-7.1-33.8 3.1zM136.5 211c7.7-13.7 19.2-21.6 31.5-21.6s23.8 7.9 31.5 21.6l9.5 17c2.1 3.7 6.2 4.7 9.3 3.7 3.6-1.1 6-4.5 5.7-8.3-3.3-42.1-32.2-71.4-56-71.4s-52.7 29.3-56 71.4c-.3 3.7 2.1 7.2 5.7 8.3 3.4 1.1 7.4-.5 9.3-3.7l9.5-17zM328 152c-23.8 0-52.7 29.3-56 71.4-.3 3.7 2.1 7.2 5.7 8.3 3.5 1.1 7.4-.5 9.3-3.7l9.5-17c7.7-13.7 19.2-21.6 31.5-21.6s23.8 7.9 31.5 21.6l9.5 17c2.1 3.7 6.2 4.7 9.3 3.7 3.6-1.1 6-4.5 5.7-8.3-3.3-42.1-32.2-71.4-56-71.4z" />
+            </svg>
+            <svg  *ngSwitchCase="6" class="mood-icon" width="25" height="25" viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+              <path 
+                d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm141.4 389.4c-37.8 37.8-88 58.6-141.4 58.6s-103.6-20.8-141.4-58.6S48 309.4 48 256s20.8-103.6 58.6-141.4S194.6 56 248 56s103.6 20.8 141.4 58.6S448 202.6 448 256s-20.8 103.6-58.6 141.4zM328 224c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32zm-160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32zm194.4 64H133.6c-8.2 0-14.5 7-13.5 15 7.5 59.2 58.9 105 121.1 105h13.6c62.2 0 113.6-45.8 121.1-105 1-8-5.3-15-13.5-15z" />
+            </svg>
+            <svg *ngSwitchDefault class="mood-icon" width="25" height="25" viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+              <path 
+                d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-110.3 0-200-89.7-200-200S137.7 56 248 56s200 89.7 200 200-89.7 200-200 200zm-80-280c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm160 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32z" />
+            </svg>
+          </div>
+          <div class="mood-desc">{{mood.description}}</div>
+        </label>
+      </div>
+    </form>
+  </div>
+</div>

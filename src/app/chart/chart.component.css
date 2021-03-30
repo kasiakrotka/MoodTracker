@@ -1,0 +1,61 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.month-name {
+  margin: 0 20px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #3a5c6d;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-bottom: 20px;
+}
+
+.chart-container {
+    padding: 20px;
+}
+
+.nav-btn {
+  background-color: transparent;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  transition: all ease 0.5s;
+}
+
+
+.nav-btn:hover {
+  background-color: rgba(184, 184, 184, 0.473);
+}
+
+.nav-btn.disabled {
+  pointer-events: none;
+  opacity: 50%;
+}
+
+.nav-btn svg {
+  margin-top: 5px;
+  width: 30px;
+  height: 30px;
+  stroke-width: 2px;
+  stroke: #3a5c6d;
+  transition: all ease 0.5s;
+}

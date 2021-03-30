@@ -1,0 +1,55 @@
+<div class="main">
+  <div [ngClass]="{'disabled': left}" class="nav-btn" (click)="moveLeft()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <polyline points="15 5 8 12 15 19" fill="none" stroke-miterlimit="10" /></svg>
+  </div>
+  <div class="main-container">
+    <div class="journal-container" [@slide]="activePanel">
+      <div class="journal-div">
+        <form #journalForm="ngForm" (ngSubmit)="saveJournalText(journalForm)" class="journal-form">
+          <h3>Jak się dzisiaj czujesz?</h3>
+          <textarea id="journal-input"></textarea>
+        </form>
+      </div>
+
+      <div class="gratitude-div">
+        <h3>Formularz wdzięczności</h3>
+        <p>Znajdź 5 rzeczy, za które jesteś dzisiaj wdzięczny:</p>
+        <form #gratitudeForm="ngForm" (ngSubmit)="saveGratitude(gratitudeForm)" class="gratitude-form">
+          <span class="gratitude-input"><input type="text" id="gratitude-input-1" autocomplete="off" name="gratitude-input-1"></span>
+          <span class="gratitude-input"><input type="text" id="gratitude-input-2" autocomplete="off" name="gratitude-input-2"></span>
+          <span class="gratitude-input"><input type="text" id="gratitude-input-3" autocomplete="off" name="gratitude-input-3"></span>
+          <span class="gratitude-input"><input type="text" id="gratitude-input-4" autocomplete="off" name="gratitude-input-4"></span>
+          <span class="gratitude-input"><input type="text" id="gratitude-input-5" autocomplete="off" name="gratitude-input-5"></span>
+        </form>
+      </div>
+
+      <div>
+        <h3 class="form-title">Znajdź coś co dzisiaj zrobiłeś i jesteś z tego dumny:</h3>
+        <div class="things-done-div">
+          <form #thingsDoneForm="ngForm" (ngSubmit)="saveThingsDone(thingsDoneForm)" class="gratitude-form">
+            <span class="gratitude-input" *ngFor="let thing of thingsDone; let i = index">
+              <input type="text" id="thing-input-{{i+1}}" name="thing-input-{{i+1}}" value="{{thing}}" ngModel>
+            </span>
+          </form>
+          <div>
+            <div [ngClass]="{'disabled': max}" class="nav-btn small-size" (click)="addThingDone()">+</div>
+            <div [ngClass]="{'disabled': min}" style="font-weight: bold;" class="nav-btn small-size" (click)="removeThingDone()">-</div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div [ngClass]="{'disabled': right}" class="nav-btn" (click)="moveRight()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <polyline points="9 19 16 12 9 5" fill="none" stroke-miterlimit="10" /></svg>
+  </div>
+</div>
+<div class="container">
+  <div class="save-btn">
+    ZAPISZ WPISY
+  </div>
+</div>
+
+

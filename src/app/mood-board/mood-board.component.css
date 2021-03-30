@@ -1,0 +1,326 @@
+.mood-board-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 100%;
+}
+
+
+/* classes for part with calendar page
+**********************************/
+.callendar-page-container{
+    position: relative; 
+    height: 280px;
+    display: inline-block;
+    margin: 20px;
+}
+
+.callendar-page{
+    background-color: #f7f7f7;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
+    width: 200px;
+    height: 240px;
+}
+
+#svg-page{
+    -webkit-filter: drop-shadow( rgba(0, 0, 0, 0.24) 2px 3px 4px);
+    filter: drop-shadow( rgba(0, 0, 0, 0.24) 2px 3px 4px);
+}
+
+#space-bt{
+    background-color: #f7f7f7;
+    width: 200px;
+    height: 10px;
+    position: absolute;
+    bottom: 35px;
+}
+
+.day-number{
+    font-size: 72px;
+    color: #383838;
+    text-align: center;
+    padding-top: 20%;
+    padding-left: 5px;
+}
+
+.month-label{
+    font-size: 24px;
+    color: #383838;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+/* classes for part with calendar form
+**********************************/
+
+.callendar-container{
+    margin: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+    max-height: 350px;
+}
+
+#calendar{
+    flex: 1;
+    background-color: #f7f7f7;
+    padding: 15px;
+    padding-top: 0px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.callendar-top{
+    background-color: #e9a14f;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 36px;
+    color: #ffe7cc;
+    font-weight: bolder;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+
+
+.row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+input.cell-input{
+    visibility: hidden;
+    width: 0px;
+    height: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+label.cell-label{
+    width: 40px;
+    height: 40px;
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    border-radius: 5px;
+}
+
+.header{
+    color: rgb(112, 112, 112);
+    font-size: 12px;
+    height: 30px;
+}
+
+.cell{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    display: table;
+}
+
+
+.day{
+    border: solid 2px transparent;
+    color: rgb(41, 41, 41);
+}
+
+.day-name{
+    vertical-align: middle;
+    display: table-cell;
+    width: 40px;
+    height: 30px;
+}
+
+input:checked + label.cell-label{
+    background: rgb(212, 212, 212);
+}
+
+td{
+    width: 50px;
+    height: 50px;
+    padding: 0px;
+    margin: 0px;
+}
+
+table{
+    border: solid rgb(208, 217, 226) 1px;
+}
+
+/*classes for mood selector
+**********************************************/
+.day-editor-form{
+
+}
+
+.day-editor{
+    height: 350px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+
+svg.mood-icon {
+    display: block;
+    margin: auto;
+    fill:  rgb(112, 112, 112) ;
+    padding-top: 7.5px;
+}
+
+.icon-div{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: rgb(236, 236, 236);
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 3px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 3px;
+}
+
+.mood-desc{
+    position: absolute;
+    width: 80px;
+    font-size: 14px;
+    left: 55px;
+    top: 18px; /*50- czcionka*/
+    text-align: right;
+    color: rgb(240, 240, 240);
+}
+
+.mood-radio{
+    width: 50px;
+    height: 50px;
+    margin: 5px 0px;
+}
+
+input.mood-input:checked + div.icon-div{
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.288) 0px 2px 4px 0px inset;
+    background: rgb(212, 212, 212);
+}
+
+input.mood-input{
+}
+
+
+label > input[type="radio"].mood-input {
+    display: none;
+}
+
+
+.mood-label{
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    overflow: hidden;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    transition: all ease 0.5s;
+}
+
+
+  .mood-label:hover{
+    width: 160px;
+}
+/* classes with bacground color for table cell 
+**********************************************/
+
+.white{
+    background-color:  rgb(236, 239, 241);
+    color: rgb(44, 44, 44);
+}
+
+.red{
+    background-color: #FF7171;
+    color: #983043;
+}
+
+.purple{
+    background-color: #B185E2;
+    color: #5D3B90;
+}
+
+.green{
+    background-color: #B7E38D;
+    color: #62874A;
+}
+
+.yellow{
+    background-color: #FCE07E;
+    color: #9C823B;
+}
+
+.blue{
+    background-color: #8991DB;
+    color: #41468A;
+}
+
+.pink{
+    background-color: #FF87E3;
+    color: #A5339F;
+}
+
+.orange{
+    background-color: #FFA769;
+    color: #985437;
+}
+
+
+label.mood-label.green {
+    background-color: #70b84d ;
+    background-image: linear-gradient(90deg, #70b84d 0%, #92dd47 96%);
+}
+
+label.mood-label.orange{
+    background-color: #ff882a;
+    background-image: linear-gradient(90deg, #ff882a 0%, #ffa769 96%);
+}
+
+label.mood-label.yellow{
+    background-color: #fbc523;
+    background-image: linear-gradient(90deg, #fbc523 0%, #fbd765 96%);
+}
+
+label.mood-label.red{
+    background-color: #f93737;
+    background-image: linear-gradient(90deg, #f93737 0%, #ff7171 96%);
+}
+
+label.mood-label.blue{
+    background-color: #4d5ff0;
+    background-image: linear-gradient(90deg, #4d5ff0 0%, #8991db 72%);    
+}
+
+label.mood-label.purple{
+    background-color: #8f3cea;
+    background-image: linear-gradient(90deg, #8f3cea 0%, #b185e2 75%);
+}
+
+label.mood-label.white{
+    background-color: #666666;
+    background-image: linear-gradient(90deg, #666666 0%, #808080 75%);
+}

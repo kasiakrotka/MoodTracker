@@ -1,0 +1,24 @@
+.btn{
+    all: unset;
+    display: inline-block;
+    background-color: #e9a14f;  
+    color: rgba(255, 255, 255, 0.897);
+    line-height: 30px;
+    width: 60px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 3px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 3px;
+    transition: all ease 0.5s;
+    margin: 0 auto;
+}
+
+.btn:hover{
+    box-shadow: #e9a14f 0px 0px 10px;
+    -webkit-box-shadow: hsl(32, 100%, 55%) 0px 0px 15px;
+  }
+
+  p{
+      color: grey;
+  }

@@ -1,0 +1,18 @@
+<div class="main-container">
+  <div class="nav-container">
+    <div class="nav-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <polyline points="15 5 8 12 15 19" fill="none" stroke-miterlimit="10" /></svg>
+    </div>
+    <div class="month-name">{{monthName}}</div>
+    <div class="nav-btn disabled">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <polyline points="9 19 16 12 9 5" fill="none" stroke-miterlimit="10" /></svg>
+    </div>
+  </div>
+  <div class="chart-container">
+    <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors"
+      [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
+</div>
